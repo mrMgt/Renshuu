@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:id="@+id/cv_view_214bo_item">
+
+    <TextView
+        android:id="@+id/textItem1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TextITem1"
+        android:layout_marginLeft="2dp"
+        android:paddingLeft="2dp"
+        android:paddingRight="5dp"
+        android:paddingBottom="10dp"
+        android:paddingTop="10dp"
+        android:textSize="20sp"
+
+        />
+
+    <TextView
+        android:id="@+id/textItem2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TextITem2"
+        android:paddingRight="5dp"
+        android:paddingBottom="10dp"
+        android:paddingTop="10dp"
+        android:textSize="20sp"
+        />
+
+    <TextView
+        android:id="@+id/textItem3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TextITem3"
+        android:paddingRight="5dp"
+        android:paddingBottom="10dp"
+        android:paddingTop="10dp"
+        android:textSize="20sp"
+        />
+
+    <TextView
+        android:id="@+id/textItem4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TextITem4"
+        android:paddingBottom="10dp"
+        android:paddingTop="10dp"
+        android:textSize="20sp"
+        />
+
+</LinearLayout>
