@@ -1,0 +1,27 @@
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="app_name">Renshuu</string>
+
+    <string name="title_character">Character</string>
+    <string name="title_chinese214">214 bộ thủ</string>
+    <string name="title_exercices">Luyện tập</string>
+    <string name="title_quiz">Kiểm tra</string>
+    <string name="title_feedback">Góp ý</string>
+    <string name="title_moreapp">ABC</string>
+    <string name="title_setting">Setting</string>
+
+    <!-- Actions -->
+    <string name="action_toggle">Toggle indicator</string>
+    <string name="action_add_item">Add item</string>
+    <string name="action_remove_item">Remove item</string>
+    <string name="action_previous">Previous</string>
+    <string name="action_next">Next</string>
+    <string name="action_finish">Finish</string>
+    <string name="action_info">Photo info</string>
+    <string name="action_photo">View photo</string>
+
+    <string name="title_template_step">Number <xliff:g id="step_number">%1$d</xliff:g></string>
+
+    <string name="lorem_ipsum"></string>
+
+    <string name="title_screen_slide">Chinese</string>
+</resources>
