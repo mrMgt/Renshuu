@@ -22,7 +22,6 @@ public class KanjiMainView extends ListActivity {
 
         // Instantiate the list of samples.
         mSamples = new Model[]{
-                new Model(R.string.title_character, CharacterActivity.class),
                 new Model(R.string.title_chinese214, Chinese214.class),
                 new Model(R.string.title_exercices, Exercices.class),
                 new Model(R.string.title_quiz, Quiz.class),

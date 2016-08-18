@@ -52,7 +52,7 @@ public class KanjiGoSetting extends Activity implements View.OnClickListener {
                 + "kanjigo";
 
 
-        DatabaseHelper database = DatabaseHelper.getInstance(getApplicationContext(),database_path,  )
+//        DatabaseHelper database = DatabaseHelper.getInstance(getApplicationContext(),database_path,  )
 
 
 
