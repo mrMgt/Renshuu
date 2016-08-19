@@ -11,11 +11,11 @@ public class DatabaseUtil {
     private static DatabaseHelper db = null;
 
     public static void setDatabaseHelper(Context context, String path,
-                                         String name, int version) {
+                                         String name, int version, String createTableName, String dropTableName) {
         updateFullMode(path + File.separator + name);
 
         try {
-            db = DatabaseHelper.getInstance(context, path, name, version);
+            db = DatabaseHelper.getInstance(context, path, name, version, createTableName, dropTableName);
         } catch (Exception e) {
             db = null;
         }

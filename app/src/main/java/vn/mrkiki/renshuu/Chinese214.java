@@ -16,11 +16,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 
+import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Vector;
 
 import vn.mrkiki.renshuu.chinese214.View1;
+import vn.mrkiki.renshuu.database.DatabaseHelper;
+import vn.mrkiki.renshuu.database.DatabaseUtil;
+import vn.mrkiki.renshuu.database.Param;
 
 
 /**
@@ -34,6 +38,7 @@ public class Chinese214 extends FragmentActivity {
     List<String[]> listData;
     ViewPager pager;
     CustomPagerAdapter adapter;
+    private DatabaseHelper db;
 
 
     @Override
@@ -147,6 +152,32 @@ public class Chinese214 extends FragmentActivity {
         }
         return listData;
     }
+
+    public List<String[]> getDataFromDb() {
+
+    }
+
+    public void prepareData(String csvfile) {
+        if (DatabaseUtil.isCreatedDB()) {
+            db = DatabaseUtil.getDatabaseHelper(getClass().toString());
+
+            db.openWriteData();
+
+
+            int statusInsert = db.insertItems(SQL.SC0001BL_SQL_02,
+                    prInsert.getParam());
+            if (statusInsert < 1) {
+                throw new RuntimeException();
+            }
+        }
+    }
+
+    private Param getInsertParam(String tableName) {
+        Param param = new Param();
+        param.add(tableName);
+        return param;
+    }
+
 
 
 }

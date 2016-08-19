@@ -27,7 +27,7 @@ public class KanjiMainView extends ListActivity {
                 new Model(R.string.title_quiz, Quiz.class),
                 new Model(R.string.title_feedback, FeedBack.class),
                 new Model(R.string.title_moreapp, MoreApp.class),
-                new Model(R.string.title_moreapp, KanjiGoSetting.class),
+                new Model(R.string.title_moreapp, KanjiGoSetting.class)
         };
 
         setListAdapter(new ArrayAdapter<Model>(this,
