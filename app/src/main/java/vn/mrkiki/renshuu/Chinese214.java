@@ -1,36 +1,35 @@
 package vn.mrkiki.renshuu;
 
-import android.app.Fragment;
-import android.app.FragmentManager;
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.AssetManager;
 import android.os.Bundle;
-import android.support.v13.app.FragmentStatePagerAdapter;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.NavUtils;
-import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ListView;
 
-import java.text.MessageFormat;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Vector;
 
-import vn.mrkiki.renshuu.chinese214.View1;
 import vn.mrkiki.renshuu.database.DatabaseHelper;
-import vn.mrkiki.renshuu.database.DatabaseUtil;
-import vn.mrkiki.renshuu.database.Param;
+import vn.mrkiki.renshuu.listener.TaskListener;
+import vn.mrkiki.renshuu.services.Chinese214ReadData;
+import vn.mrkiki.renshuu.utils.Param;
 
 
 /**
  * Created by linhnd on 2016/08/05.
  */
-public class Chinese214 extends FragmentActivity {
+public class Chinese214 extends FragmentActivity implements TaskListener {
 
     private Context mContext;
     ListView listview1, listview2, listview3, listview4, listview5, listview6, listview7, listview8;
@@ -39,6 +38,8 @@ public class Chinese214 extends FragmentActivity {
     ViewPager pager;
     CustomPagerAdapter adapter;
     private DatabaseHelper db;
+    Chinese214ReadData  chinese214ReadData;
+    private final String CSV_PATH = "data.csv";
 
 
     @Override
@@ -79,26 +80,23 @@ public class Chinese214 extends FragmentActivity {
             }
         });
 
-        listData = new ArrayList<String[]>();
+        listData = readData();
 
-        listData = buildData();
-
-
-        arrayAdapter = new Chinese214ArrayAdapter(this, listData);
+        arrayAdapter = new Chinese214ArrayAdapter(this, getSubData("page1"));
         listview1.setAdapter(arrayAdapter);
-        arrayAdapter = new Chinese214ArrayAdapter(this, listData);
+        arrayAdapter = new Chinese214ArrayAdapter(this, getSubData("page2"));
         listview2.setAdapter(arrayAdapter);
-        arrayAdapter = new Chinese214ArrayAdapter(this, listData);
+        arrayAdapter = new Chinese214ArrayAdapter(this, getSubData("page3"));
         listview3.setAdapter(arrayAdapter);
-        arrayAdapter = new Chinese214ArrayAdapter(this, listData);
+        arrayAdapter = new Chinese214ArrayAdapter(this, getSubData("page4"));
         listview4.setAdapter(arrayAdapter);
-        arrayAdapter = new Chinese214ArrayAdapter(this, listData);
+        arrayAdapter = new Chinese214ArrayAdapter(this, getSubData("page5"));
         listview5.setAdapter(arrayAdapter);
-        arrayAdapter = new Chinese214ArrayAdapter(this, listData);
+        arrayAdapter = new Chinese214ArrayAdapter(this, getSubData("page6"));
         listview6.setAdapter(arrayAdapter);
-        arrayAdapter = new Chinese214ArrayAdapter(this, listData);
+        arrayAdapter = new Chinese214ArrayAdapter(this, getSubData("page7"));
         listview7.setAdapter(arrayAdapter);
-        arrayAdapter = new Chinese214ArrayAdapter(this, listData);
+        arrayAdapter = new Chinese214ArrayAdapter(this, getSubData("page8"));
         listview8.setAdapter(arrayAdapter);
     }
 
@@ -153,24 +151,6 @@ public class Chinese214 extends FragmentActivity {
         return listData;
     }
 
-    public List<String[]> getDataFromDb() {
-
-    }
-
-    public void prepareData(String csvfile) {
-        if (DatabaseUtil.isCreatedDB()) {
-            db = DatabaseUtil.getDatabaseHelper(getClass().toString());
-
-            db.openWriteData();
-
-
-            int statusInsert = db.insertItems(SQL.SC0001BL_SQL_02,
-                    prInsert.getParam());
-            if (statusInsert < 1) {
-                throw new RuntimeException();
-            }
-        }
-    }
 
     private Param getInsertParam(String tableName) {
         Param param = new Param();
@@ -178,6 +158,73 @@ public class Chinese214 extends FragmentActivity {
         return param;
     }
 
+
+    @Override
+    public void onResultAvailable(Object... objects) {
+
+        if (objects != null) {
+            this.listData = (List<String[]>)objects[0];
+        }
+    }
+
+    private List<String[]> readData() {
+        List<String[]> listData = null;
+        String line;
+        String item1 = null;
+        String item2 = null;
+        String item3 = null;
+        String item4 = null;
+        String[] rowList = null;
+        InputStream csvStream = null;
+        BufferedReader reader = null;
+
+        try {
+            AssetManager assetManager = this.getAssets();
+
+            csvStream = assetManager.open(CSV_PATH);
+            reader = new BufferedReader(new InputStreamReader(csvStream));
+            listData = new ArrayList<>();
+
+            while ((line = reader.readLine()) != null) {
+                String[] rowData = line.split(",");
+
+                if (rowData != null) {
+                    listData.add(rowData);
+                }
+            }
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        } finally {
+            try {
+                csvStream.close();
+                reader.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+        }
+        return listData;
+    }
+
+    private List<String[]> getSubData(String page) {
+        List<String[]> listSubData = new ArrayList<>();
+        String row[];
+        if (listData != null && listData.size() > 0) {
+
+            for (String[] item : listData) {
+                if (page.equals(item[0])) {
+                    row = new String[4];
+                    for(int i=1;i<item.length;i++) {
+                        if (item[i] != null) {
+                            row[i-1]=item[i];
+                        }
+                    }
+                    listSubData.add(row);
+                }
+            }
+        }
+        return listSubData;
+    }
 
 
 }

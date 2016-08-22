@@ -12,7 +12,9 @@ public final class SQL {
             "ID INT PRIMARY KEY NOT NULL AUTOINCREMENT , " +
             "NAME TEXT NOT NULL, " +
             "MEAN TEXT NOT NULL, " +
-            "chinese TEXT NOT NULL, " +
-            "example TEXT NOT NULL)";
-    public static final String SQL_01 = "insert into chinese(table_name,value) values (?,0)";
+            "CHINESE TEXT NOT NULL, " +
+            "EXAMPLE TEXT NOT NULL)";
+    public static final String SQL_01 = "insert into chinese(NAME,MEAN) values (?,?)";
+
+    public static final String SQL_02 = "insert into exercice(name, mean, chinese, exercise) values (?,?,?,?)";
 }

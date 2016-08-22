@@ -1,10 +1,10 @@
-package vn.mrkiki.renshuu.database;
+package vn.mrkiki.renshuu.utils;
 
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by linhnd on 2016/08/19.
+ * Created by linhnd on 2016/08/22.
  */
 public class Param {
     private List<String> lstParam;

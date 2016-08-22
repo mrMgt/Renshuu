@@ -17,6 +17,7 @@ public class Chinese214ArrayAdapter extends ArrayAdapter {
     private final Context context;
     private final List<String[]> values;
 
+
     public Chinese214ArrayAdapter(Context context, List<String[]> values) {
         super(context, R.layout.view_chinese_214_items, values);
 
@@ -59,4 +60,6 @@ public class Chinese214ArrayAdapter extends ArrayAdapter {
         public TextView text3;
         public TextView text4;
     }
+
+
 }
